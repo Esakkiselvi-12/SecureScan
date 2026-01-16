@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureScan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">SecureScan</div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<div class="container">
+
+    <h1>SecureScan</h1>
+    <p class="subtitle">Advanced Web Vulnerability & Security Scanner</p>
+
+    <form method="POST">
+        <input type="text" name="target" placeholder="Enter website URL or IP" required>
+        <button type="submit">Start Scan</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <h2>Scan Result for {{ target }}</h2>
+        <p><strong>Resolved IP:</strong> {{ result.ip }}</p>
+
+        <ul>
+            {% for port in result.ports %}
+                <li>{{ port }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <section class="info-section">
+        <h2>Why SecureScan?</h2>
+
+        <p>
+            SecureScan is a beginner-friendly web vulnerability scanning tool designed
+            for educational and academic purposes. This application helps users
+            understand how basic reconnaissance techniques work in cybersecurity.
+        </p>
+
+        <p>
+            The scanner identifies commonly exposed network services by checking
+            standard ports used by web servers, databases, and remote access services.
+            It also resolves domain names into IP addresses for analysis.
+        </p>
+
+        <p>
+            SecureScan is intended for students, cybersecurity learners, and demo
+            projects. It does not perform aggressive penetration testing and should
+            only be used on websites you own or have permission to test.
+        </p>
+    </section>
+<div class="content-wrapper">
+    <div class="section-box">
+    <h2>How SecureScan Works</h2>
+    <p>
+        SecureScan works by performing a lightweight network scan on the given
+        website or IP address. When a user submits a target, the backend Flask
+        server processes the request and dynamically selects commonly used ports
+        based on the type of service detected. These ports are then tested using
+        socket connections to determine whether they are open or closed. Open
+        ports may indicate exposed services which, if misconfigured, could lead
+        to security vulnerabilities.
+    </p>
+</div>
+
+<div class="section-box">
+    <h2>Open Port Analysis</h2>
+    <p>
+        Open ports are communication endpoints that allow data to flow between
+        a server and external systems. While some ports such as 80 (HTTP) and
+        443 (HTTPS) are necessary for web services, other open ports like FTP,
+        SSH, or database ports can pose a risk if left unprotected. SecureScan
+        identifies these ports to help users understand potential attack surfaces
+        in their systems.
+    </p>
+</div>
+
+<div class="section-box">
+    <h2>Server Header Inspection</h2>
+    <p>
+        SecureScan also inspects HTTP response headers returned by the target
+        server. These headers sometimes reveal information about the web server
+        software and its version. Exposing such details can assist attackers in
+        targeting known vulnerabilities. This tool highlights whether the server
+        information is visible or properly hidden as a basic security measure.
+    </p>
+</div>
+
+<div class="section-box">
+    <h2>Educational Purpose</h2>
+    <p>
+        This application is developed strictly for educational and academic use.
+        It helps students, beginners, and cybersecurity enthusiasts gain hands-on
+        experience in understanding basic vulnerability assessment techniques.
+        SecureScan does not perform brute-force attacks, exploit vulnerabilities,
+        or bypass authentication mechanisms. Users are strongly advised to scan
+        only systems they own or have explicit permission to test.
+    </p>
+</div>
+
+<div class="section-box">
+    <h2>Limitations of SecureScan</h2>
+    <p>
+        SecureScan is a beginner-friendly vulnerability scanner and does not
+        replace professional penetration testing tools. It does not detect
+        advanced vulnerabilities such as SQL injection, cross-site scripting,
+        or zero-day exploits. However, it provides a strong foundation for
+        understanding how basic security assessments are performed in real-world
+        environments.
+    </p>
+    </div>
+</div>
+
+
+</div>
+
+</body>
+</html>
